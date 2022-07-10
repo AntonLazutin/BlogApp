@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class="card" style="width: 500px; margin: 0 auto; margin-bottom: 50px ">
+                <div class="card-body">
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.text }}</p>
+                    <p>{{ post.author }}</p>
+                    <p>{{ post.date }}</p>
+                    <p>{{ post.likes }}</p>
+                    <button class="btn btn-success">LIKE</button>
+                    <button class="btn btn-danger">DISLIKE</button>
+                </div>
+          </div>
+        {% endfor %}
+    {% else %}
+        <h1>No posts yet!</h1>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Title</label>
+            {{ form.title }}
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Text</label>
+            {{ form.text }}
+          </div>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+    {% else %}
+        <h1>Log in to post...</h1>
+    {% endif %}
+{% endblock content %}
