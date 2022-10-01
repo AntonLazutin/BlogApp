@@ -10,3 +10,9 @@
   width: 100%; /* Full width */
 z-index: 1000;
 }
+
+.box {
+  border: solid;
+  border-color: black;
+  border-width: 10px;
+}

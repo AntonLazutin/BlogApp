@@ -1,25 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% load crispy_forms_filters %}
+{% load static %}
 
 {% block content %}
-    {% if posts %}
-        {% for post in posts %}
-            <div class="card" style="width: 500px; margin: 0 auto; margin-bottom: 50px ">
-                <div class="card-body">
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.text }}</p>
-                    <p>{{ post.author }}</p>
-                    <p>{{ post.date }}</p>
-                    <p>{{ post.likes }}</p>
-                    <button class="btn btn-success">LIKE</button>
-                    <button class="btn btn-danger">DISLIKE</button>
-                </div>
-          </div>
-        {% endfor %}
-    {% else %}
-        <h1>No posts yet!</h1>
-    {% endif %}
+  <div class="card" style="
+  padding-left: 100px;">
+    <div class="card-body" style="width: 500px;  ">
     {% if user.is_authenticated %}
         <form method="post">
           {% csrf_token %}
@@ -35,5 +22,17 @@
         </form>
     {% else %}
         <h1>Log in to post...</h1>
+    {% endif %}
+      </div>
+  </div>
+    {% if posts %}
+        {% for post in posts %}
+           <a href={{ post.get_absolute_url }}>{{ post.title }}</a>
+           <p>by <strong><a href="{% url 'profile_page' post.author.id %}">{{ post.author }}</a></strong></p>
+           {{ post.date }}
+           <hr>
+        {% endfor %}
+    {% else %}
+        <h1>No posts yet!</h1>
     {% endif %}
 {% endblock content %}

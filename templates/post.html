@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="width: 500px; margin: 100px ; margin-bottom: 50px ">
+    <div class="card-body">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text }}</p>
+        <hr>
+        <p><strong>Author: </strong>{{ post.author }}</p>
+        <p><strong>Posted: </strong>{{ post.date }}</p>
+        <p><strong>Likes: </strong>{{ post.get_total_likes }}</p>
+        <form method="POST" action="{% url 'reaction' post.id%}">
+          {%csrf_token%}
+          <button type="sumbit" name="like-button" class="btn btn-success" value="like">Like</button>
+          <button type="sumbit" name="like-button" class="btn btn-danger" value="dislike">Dislike</button>
+        </form>
+        <hr>
+        <br>
+        {% if post.comments.all %}
+          {% for comment in post.comments.all%}
+            <strong> {{ comment.name }} - {{ comment.date_added}}</strong>
+            <p> {{ comment.text }}</p>
+          {% endfor %}
+          {% else %}
+          <h2>Comments...</h2>
+          <br>
+        {% endif %}
+    </div>
+{% endblock content%}

@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content%}
-    {{ user.username }}
+    <h2 style="padding-left: 200px"> {{ user.username }}'s page </h2>
     {% for post in posts %}
-         <div class="card" style="width: 500px; margin: 0 auto; margin-bottom: 50px ">
+         <div class="card" style="width: 500px; margin: 100px ; margin-bottom: 50px ">
                 <div class="card-body">
                     <p>{{ post.title }}</p>
                     <p>{{ post.text }}</p>
-                    <p>{{ post.author }}</p>
-                    <p>{{ post.date }}</p>
-                    <p>{{ post.likes }}</p>
+                    <p style="font-weight: bold">by: {{ post.author }}</p>
+                    <p style="font-weight: bold">date: {{ post.date }}</p>
+                    <p style="font-weight: bold">likes: {{ post.likes }}</p>
                 </div>
           </div>
     {% endfor %}

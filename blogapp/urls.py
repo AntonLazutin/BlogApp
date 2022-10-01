@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name="logout"),
     path('login/', views.login_view, name="login"),
     path('sign_up/', views.signup_page, name="sign_up"),
-    path('{slug}/', views.post_page, name="post_page"),
-    path('profile/<int:id>', views.profile_page, name="profile_page"),
+    path('posts/<int:pk>/', views.post_page, name="post"),
+    path('profile/<int:pk>', views.profile_page, name="profile_page"),
+    path('reaction/<int:pk>', views.reacted, name="reaction"),
 ]
